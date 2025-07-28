@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/27 21:18:14 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:25:07 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ int main(int argc, char **argv)
 		memset(&prog, 0, sizeof(t_philos));	
 		if (fill_program_data(argc, argv, &prog) == -1)
 			return (1);
-
+		if (ft_mutex_init(&prog) == -1)
+			return (1);
+		if (forks_init(&prog) == -1)
+			return (1);
 		
 	}
 	return (0);
 }
 
-int fill_program_data(int argc, char **argv, t_program *prog)
+
+long long get_time()
 {
-	if (!prog)
+	struct timeval tv;
+	long long current_time_milli;
+
+	if (gettimeofday(&tv, NULL) == -1)
 		return (-1);
-	prog->num_philos = ft_atol(argv[1]);
-	prog->time_to_die = ft_atol(argv[2]);
-	prog->time_to_eat = ft_atol(argv[3]);
-	prog->time_to_sleep = ft_atol(argv[4]);
-	if (argc == 6)
-		prog->num_meals_must_eat = ft_atol(argv[5]);
-	else
-		prog->num_meals_must_eat = -1;
-	return (0);
+	current_time_milli = tv.tv_sec * 1000 + tv.tv_usec / 1000; 
+	return (current_time_milli);
 }

@@ -6,11 +6,12 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:57:10 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/27 20:57:58 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:18:08 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
 int check_args(int argc, char **argv)
 {
 	int i;
@@ -26,6 +27,7 @@ int check_args(int argc, char **argv)
 	}
 	return (0);
 }
+
 int check_range(char *s)
 {
 	long long num;
