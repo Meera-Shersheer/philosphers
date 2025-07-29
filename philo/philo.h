@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 21:06:07 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:16:37 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_program
 {
 	int num_philos;
 	int philos_ready;
-	int is_stoped;
+	int is_stopped;
 	long long time_to_die;
 	long long time_to_eat;
 	long long time_to_sleep;
@@ -41,6 +41,7 @@ typedef struct s_program
 
 typedef struct s_philos 
 {
+	t_program *prog;
 	int index;
 	long long meals_eaten;
 	int is_eating;
@@ -60,6 +61,7 @@ typedef struct s_forks
 
 //main
 long long get_time();
+void print_actions(t_program *prog, int action,long long time);
 
 //parsing
 int check_args(int argc, char **argv);
@@ -78,9 +80,9 @@ int philos_init(t_program *prog);
 int threads_init(t_program *prog);
 
 //monitor
-int	record_meal_time(t_philos *philo);
-void *routine(void *philo);
-void *monitor(void *proggram);
+void *routine(t_philos *philo);
+int should_stop(t_program *prog);
+//void *monitor(t_program *prog);
 
 //wait
 int	wait_philos(t_program *prog);
@@ -90,4 +92,23 @@ int	intrept_waiting(long long time, t_program *prog);
 //destroy
 int destroy_intrupted_philos(int i, t_philos *philos_list, t_program *prog);
 int destroy_mutexes(t_program *prog);
+
+//routine
+int sleep(t_program *prog);
+int think(t_program *prog);
+
+//eat
+int	eaten_enough_meals(t_philos *philo);
+static void update_philo_state(t_philos *philo, int state);
+void setup_forks(t_philos *philo, t_forks **first, t_forks **second);
+int	record_meal_time(t_philos *philo);
+int eat(t_philos *philo);
+
+//eat2
+void release_forks(t_forks *first, t_forks *secound);
+int take_fork(t_philos *philo, t_forks *first, t_forks *second);
+
+
+
+
 #endif

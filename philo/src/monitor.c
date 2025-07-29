@@ -6,29 +6,59 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:57:47 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 20:16:36 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:16:25 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	record_meal_time(t_philos *philo)
+
+
+void *routine(t_philos *philo)
 {
-	if (pthread_mutex_lock(&(philo->meal_mutex)))
-		return (-1);
-	philo->last_meal_time = get_time();
-	if (pthread_mutex_unlock(&(philo->meal_mutex)))
-		return (-1);
-	return (0);
+	ft_wait(philo->prog);
+	if(philo->index % 2 == 0)
+		usleep(1000);
+	if (record_meal_time(philo) == -1)
+		return (NULL);
+	while (should_stop(philo->prog) != 1)
+	{
+    	if (eat (philo) == -2)
+	 		break;
+		if (sleep(philo) == -2)
+			break;
+		if (think(philo) == -2)
+			break;
+	}
+    return (NULL);
 }
 
-void *routine(void *philo)
+
+
+
+
+// void *monitor(t_program *prog)
+// {
+// 	if (wait_philos(prog) == -1)
+// 		return (NULL);
+// 	check_num_meals(prog);
+//    //printf("Thread running with arg = %s\n", (char *)arg);
+//     return (NULL);
+// }
+
+
+
+int should_stop(t_program *prog)
 {
-    //printf("Thread running with arg = %s\n", (char *)arg);
-    return (NULL);
-}
-void *monitor(void *proggram)
-{
-   //printf("Thread running with arg = %s\n", (char *)arg);
-    return (NULL);
+	if (pthread_mutex_lock(&(prog->state)))
+		return (-1);
+	if (prog->is_stopped == 1)
+	{
+		if (pthread_mutex_unlock(&(prog->state)))
+			return (-1);
+		return (1);
+	}
+	if (pthread_mutex_unlock(&(prog->state)))
+		return (-1);
+	return (0);
 }

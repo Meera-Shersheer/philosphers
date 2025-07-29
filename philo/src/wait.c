@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 20:16:23 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 20:16:47 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 20:42:26 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,13 @@ int	intrept_waiting(long long time, t_program *prog)
 	start_time = get_time();
 	while((get_time() - start_time) < time)
 	{
-		if (pthread_mutex_lock(&(prog->state)))
-			return (-1);
-		if (prog->is_stoped == 1)
+		pthread_mutex_lock(&(prog->state));
+		if (prog->is_stopped == 1)
 		{
 			pthread_mutex_unlock(&(prog->state));
 			return(1);
 		}
-		if (pthread_mutex_unlock(&(prog->state)))
-			return (-1);
+		pthread_mutex_unlock(&(prog->state));
 		usleep (100);
 	}
 	return(0);

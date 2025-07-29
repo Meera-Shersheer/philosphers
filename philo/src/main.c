@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 21:06:28 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 20:55:34 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,30 @@ long long get_time()
 	current_time_milli = tv.tv_sec * 1000 + tv.tv_usec / 1000; 
 	return (current_time_milli);
 }
+
+
+/*
+◦ timestamp_in_ms X has taken a fork 
+◦ timestamp_in_ms X is eating ◦ 
+timestamp_in_ms X is sleeping ◦ 
+timestamp_in_ms X is thinking ◦ 
+timestamp_in_ms X died
+*/
+void print_actions(t_program *prog, int action,long long time)
+{	
+	if (pthread_mutex_lock(&(prog->print)))
+			return (-1);
+	if (action == 0)
+		printf("%ld %ld has taken a fork", time, prog->philos->index);
+	else if (action == 1)
+		printf("%ld %ld is eating", time, prog->philos->index);
+	else if (action == 2)
+		printf("%ld %ld is sleeping", time, prog->philos->index);
+	else if (action == 3)
+		printf("%ld %ld is thinking", time, prog->philos->index);
+	else if (action == 4)
+		printf("%ld %ld died", time, prog->philos->index);
+	if (pthread_mutex_unlock(&(prog->print)))
+			return (-1);
+}
+

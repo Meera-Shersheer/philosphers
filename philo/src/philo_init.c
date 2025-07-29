@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:34:38 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 21:05:11 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:17:08 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int philos_init(t_program *prog)
 		}
 		philos_list[i].r_fork = &((prog->forks)[i]);
 		philos_list[i].l_fork = &((prog->forks)[(i + 1) % prog->num_philos]);
+		philos_list[i].prog = prog;
 		i++;
 	}
 	prog->philos = philos_list;
@@ -110,8 +111,8 @@ int threads_init(t_program *prog)
 		if (record_meal_time(&(philos_list[i])) == -1)
 			return (-1);
 	}
-	if (pthread_create(&monitor_th, NULL, monitor, prog) != 0)
-			return (-1);
+	// if (pthread_create(&monitor_th, NULL, monitor, prog) != 0)
+	// 		return (-1);
 	return (wait_philos(prog));
 }
 
