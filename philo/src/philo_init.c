@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:34:38 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:17:08 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:42:32 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int fill_program_data(int argc, char **argv, t_program *prog)
 		prog->num_meals_must_eat = ft_atol(argv[5]);
 	else
 		prog->num_meals_must_eat = -1;
+	prog->is_stopped = 0;
 	return (0);
 }
 
@@ -97,7 +98,6 @@ int philos_init(t_program *prog)
 
 int threads_init(t_program *prog)
 {
-	pthread_t monitor_th;
 	t_philos	*philos_list;
 	int i;
 
@@ -106,11 +106,16 @@ int threads_init(t_program *prog)
 	prog->start_time = get_time();
 	while (i < prog->num_philos)
 	{
-		if (pthread_create(philos_list[i].thread_id , NULL, routine, &philos_list[i]) != 0)
+		if (pthread_create(&(philos_list[i].thread_id), NULL, routine, &philos_list[i]) != 0)
 			return (-1);
 		if (record_meal_time(&(philos_list[i])) == -1)
 			return (-1);
+		i++;
 	}
+	pthread_mutex_lock(&(prog->state));
+	prog->philos_ready = 1;
+	pthread_mutex_unlock(&(prog->state));
+
 	// if (pthread_create(&monitor_th, NULL, monitor, prog) != 0)
 	// 		return (-1);
 	return (wait_philos(prog));

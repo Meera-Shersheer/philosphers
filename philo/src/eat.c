@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 20:10:01 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:14:19 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:52:20 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	eaten_enough_meals(t_philos *philo)
 	return (0);
 }
 
-static void update_philo_state(t_philos *philo, int state)
+void update_philo_state(t_philos *philo, int state)
 {
 	if (state == 0)
 	{
@@ -77,7 +77,7 @@ int eat(t_philos *philo)
 	if(take_fork(philo, first, second) == 1)
 		return (-2);
 	update_philo_state(philo, 0);
-	print_actions(philo->prog, 1, get_time() - philo->prog->start_time);
+	print_actions(philo, 1, get_time() - philo->prog->start_time);
 	if(intrept_waiting(philo->prog->time_to_eat, philo->prog) == 1)
 	{
 		update_philo_state(philo, 1);

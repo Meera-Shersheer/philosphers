@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 20:55:34 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:48:11 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ timestamp_in_ms X is sleeping ◦
 timestamp_in_ms X is thinking ◦ 
 timestamp_in_ms X died
 */
-void print_actions(t_program *prog, int action,long long time)
+void print_actions(t_philos *philo, int action,long long time)
 {	
-	if (pthread_mutex_lock(&(prog->print)))
-			return (-1);
+	if (pthread_mutex_lock(&(philo->prog->print)))
+			return ;
 	if (action == 0)
-		printf("%ld %ld has taken a fork", time, prog->philos->index);
+		printf("%lld %d has taken a fork\n", time, philo->index);
 	else if (action == 1)
-		printf("%ld %ld is eating", time, prog->philos->index);
+		printf("%lld %d is eating\n", time, philo->index);
 	else if (action == 2)
-		printf("%ld %ld is sleeping", time, prog->philos->index);
+		printf("%lld %d is sleeping\n", time, philo->index);
 	else if (action == 3)
-		printf("%ld %ld is thinking", time, prog->philos->index);
+		printf("%lld %d is thinking\n", time, philo->index);
 	else if (action == 4)
-		printf("%ld %ld died", time, prog->philos->index);
-	if (pthread_mutex_unlock(&(prog->print)))
-			return (-1);
+		printf("%lld %d died\n", time, philo->index);
+	if (pthread_mutex_unlock(&(philo->prog->print)))
+			return ;
 }
 

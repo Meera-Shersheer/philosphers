@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:16:37 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:51:02 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include <pthread.h>
 #include <sys/time.h>
 
+typedef struct s_philos t_philos;
+typedef struct s_forks t_forks;
 typedef struct s_program
 {
 	int num_philos;
@@ -61,7 +63,7 @@ typedef struct s_forks
 
 //main
 long long get_time();
-void print_actions(t_program *prog, int action,long long time);
+void print_actions(t_philos *philo, int action,long long time);
 
 //parsing
 int check_args(int argc, char **argv);
@@ -80,7 +82,7 @@ int philos_init(t_program *prog);
 int threads_init(t_program *prog);
 
 //monitor
-void *routine(t_philos *philo);
+void *routine(void *arg);
 int should_stop(t_program *prog);
 //void *monitor(t_program *prog);
 
@@ -94,12 +96,12 @@ int destroy_intrupted_philos(int i, t_philos *philos_list, t_program *prog);
 int destroy_mutexes(t_program *prog);
 
 //routine
-int sleep(t_program *prog);
-int think(t_program *prog);
+int ft_sleep(t_philos *philo);
+int think(t_philos *philo);
 
 //eat
 int	eaten_enough_meals(t_philos *philo);
-static void update_philo_state(t_philos *philo, int state);
+void update_philo_state(t_philos *philo, int state);
 void setup_forks(t_philos *philo, t_forks **first, t_forks **second);
 int	record_meal_time(t_philos *philo);
 int eat(t_philos *philo);

@@ -6,33 +6,33 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:06:05 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:18:51 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:51:50 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
 
-int sleep(t_program *prog)
+int ft_sleep(t_philos *philo)
 {
-	if (should_stop(prog) == 1)
+	if (should_stop(philo->prog) == 1)
 		return (-2);
 	else
 	{
-		print_actions(prog, 2, get_time() - prog->start_time);
-		intrept_waiting(prog->time_to_sleep, prog);
+		print_actions(philo, 2, get_time() - philo->prog->start_time);
+		intrept_waiting(philo->prog->time_to_sleep, philo->prog);
 	}
 	return (0);
 }
 
-int think(t_program *prog)
+int think(t_philos *philo)
 {
-	if (should_stop(prog) == 1)
+	if (should_stop(philo->prog) == 1)
 		return (-2);
 	else
 	{
-		print_actions(prog, 3, get_time() - prog->start_time);
-		intrept_waiting(1, prog);
+		print_actions(philo, 3, get_time() - philo->prog->start_time);
+		intrept_waiting(1, philo->prog);
 	}
 	return (0);
 }

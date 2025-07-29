@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:57:47 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:16:25 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:51:19 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 
 
-void *routine(t_philos *philo)
+void *routine(void *arg)
 {
+	t_philos *philo;
+
+	philo = (t_philos *) arg;
 	ft_wait(philo->prog);
 	if(philo->index % 2 == 0)
 		usleep(1000);
@@ -23,9 +26,11 @@ void *routine(t_philos *philo)
 		return (NULL);
 	while (should_stop(philo->prog) != 1)
 	{
+		if (eaten_enough_meals(philo) == 1)
+			break;
     	if (eat (philo) == -2)
 	 		break;
-		if (sleep(philo) == -2)
+		if (ft_sleep(philo) == -2)
 			break;
 		if (think(philo) == -2)
 			break;

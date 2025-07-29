@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:57:10 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 20:20:08 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/29 21:34:02 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int check_args(int argc, char **argv)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	if (argc < 5 || argc > 6)
 	{
 		write(2,"philo arguments: num_of_philos time_to_die time_to_eat \
