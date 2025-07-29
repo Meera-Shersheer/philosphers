@@ -5,7 +5,7 @@ CYAN    = \033[3;36m
 NC         = \033[0m
 
 
-SRC= main.c untils.c parsing.c philo_init.c  monitor.c 
+SRC= main.c untils.c parsing.c philo_init.c  monitor.c wait.c destroy.c
 NAME = philo
 
 CC= cc

@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:57:10 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 18:18:08 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:20:08 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,23 @@ int check_args(int argc, char **argv)
 	int i;
 
 	i = 0;
-	while (i < argc)
+	if (argc < 5 || argc > 6)
 	{
-		if (check_is_num(argv[i]) == -1)
-			return (-1);
-		if (check_range(argv[i]) == -1)
-			return (-1);
-		i++;
+		write(2,"philo arguments: num_of_philos time_to_die time_to_eat \
+			time_to_sleep [num_of_must_eaten_meals]\n", ft_strlen("philo \
+				arguments: num_of_philos time_to_die time_to_eat \
+			time_to_sleep [num_of_must_eaten_meals]\n"));
+	}
+	else
+	{		
+		while (i < argc)
+		{
+			if (check_is_num(argv[i]) == -1)
+				return (-1);
+			if (check_range(argv[i]) == -1)
+				return (-1);
+			i++;
+		}
 	}
 	return (0);
 }

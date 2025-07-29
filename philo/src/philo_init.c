@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:34:38 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 18:58:06 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:05:11 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int ft_mutex_init(t_program *prog)
 	if (pthread_mutex_init(&(prog->print) , NULL) != 0)
 		return (-1);
 	if (pthread_mutex_init(&(prog->state) , NULL) != 0)
+	{
+		pthread_mutex_destroy(&(prog->print));
 		return (-1);
+	}
 	 return (0);
 }
 
@@ -50,7 +53,15 @@ int forks_init(t_program *prog)
 	{
 		forks_list[i].fork_id = i;
 		if (pthread_mutex_init(&(forks_list[i].fork_mutex) , NULL) != 0)
+		{
+			while (--i >= 0)
+			{
+				pthread_mutex_destroy(&(forks_list[i].fork_mutex));
+			}
+			pthread_mutex_destroy(&(prog->state));
+			pthread_mutex_destroy(&(prog->print));
 			return (-1);
+		}
 		i++;
 	}
 	prog->forks = forks_list;
@@ -60,11 +71,9 @@ int forks_init(t_program *prog)
 int philos_init(t_program *prog)
 {
 	t_philos	*philos_list;
-	t_forks	*forks_list;
 	int i;
 	
 	i = 0;
-	forks_list = prog->forks;
 	philos_list = malloc (sizeof(t_philos) * (prog->num_philos + 1));
 	if (philos_list  == NULL)
 		return (-1);
@@ -72,10 +81,13 @@ int philos_init(t_program *prog)
 	while (i < prog->num_philos)
 	{
 		philos_list[i].index = i + 1;
-		if (pthread_mutex_init(&(philos_list[i].meal_mutex) , NULL) != 0)
+		if (pthread_mutex_init(&(philos_list[i].meal_mutex) , NULL) != 0)//DESTROY THE OTHER MUTEXES IF IT'S FAIL!!
+		{
+			destroy_intrupted_philos(i, philos_list, prog);
 			return (-1);
-		philos_list[i].r_fork = &(forks_list[i]);
-		philos_list[i].l_fork = &(forks_list[(i + 1) % prog->num_philos]);
+		}
+		philos_list[i].r_fork = &((prog->forks)[i]);
+		philos_list[i].l_fork = &((prog->forks)[(i + 1) % prog->num_philos]);
 		i++;
 	}
 	prog->philos = philos_list;
@@ -100,6 +112,6 @@ int threads_init(t_program *prog)
 	}
 	if (pthread_create(&monitor_th, NULL, monitor, prog) != 0)
 			return (-1);
-	
-	return (0);
+	return (wait_philos(prog));
 }
+

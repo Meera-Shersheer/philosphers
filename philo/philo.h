@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 19:00:17 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:06:07 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_program
 {
 	int num_philos;
 	int philos_ready;
+	int is_stoped;
 	long long time_to_die;
 	long long time_to_eat;
 	long long time_to_sleep;
@@ -56,6 +57,7 @@ typedef struct s_forks
 	pthread_mutex_t fork_mutex;
 }	t_forks;
 
+
 //main
 long long get_time();
 
@@ -73,13 +75,19 @@ int fill_program_data(int argc, char **argv, t_program *prog);
 int ft_mutex_init(t_program *prog);
 int forks_init(t_program *prog);
 int philos_init(t_program *prog);
+int threads_init(t_program *prog);
 
 //monitor
-int	wait_philos(t_program *prog);
-int	ft_wait(t_program *prog);
 int	record_meal_time(t_philos *philo);
 void *routine(void *philo);
 void *monitor(void *proggram);
-int threads_init(t_program *prog);
 
+//wait
+int	wait_philos(t_program *prog);
+int	ft_wait(t_program *prog);
+int	intrept_waiting(long long time, t_program *prog);
+
+//destroy
+int destroy_intrupted_philos(int i, t_philos *philos_list, t_program *prog);
+int destroy_mutexes(t_program *prog);
 #endif

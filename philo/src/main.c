@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 17:25:07 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:06:28 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,22 @@ int main(int argc, char **argv)
 {
 	t_program prog;
 	
-	if (argc < 5 || argc > 6)
-		write(2,"philo arguments: num_of_philos time_to_die time_to_eat \
-			time_to_sleep [num_of_must_eaten_meals]\n", ft_strlen("philo \
-				arguments: num_of_philos time_to_die time_to_eat \
-			time_to_sleep [num_of_must_eaten_meals]\n"));
-	else
-	{
-		if (check_args(argc, argv) == -1)
-			return (1);
-		memset(&prog, 0, sizeof(t_philos));	
-		if (fill_program_data(argc, argv, &prog) == -1)
-			return (1);
-		if (ft_mutex_init(&prog) == -1)
-			return (1);
-		if (forks_init(&prog) == -1)
-			return (1);
+	if (check_args(argc, argv) == -1)
+		return (1);
+	memset(&prog, 0, sizeof(t_philos));	
+	if (fill_program_data(argc, argv, &prog) == -1)
+		return (1);
+	if (ft_mutex_init(&prog) == -1)
+		return (1);
+	if (forks_init(&prog) == -1)
+		return (1);
+	if (philos_init(&prog) == -1)
+		return (1);
+	if (threads_init(&prog) == -1)
+		return (1);
+	destroy_mutexes(&prog);
 		
-	}
+
 	return (0);
 }
 
