@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:06:05 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 18:03:17 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:52:47 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int think(t_philos *philo)
 	else
 	{
 		print_actions(philo, 3, get_time() - philo->prog->start_time);
-		intrept_waiting(0.5, philo->prog);
+		usleep(500);
 	}
 	return (0);
 }
