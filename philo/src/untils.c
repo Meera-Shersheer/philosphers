@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:28 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/28 20:16:06 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:02:53 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,12 @@ long long	ft_atol(const char *nptr)
 		nptr++;
 	}
 	return (num * pn);
+}
+
+void	ft_free(t_philos *philo, t_forks *fork)
+{
+	if (!philo || !fork)
+		return ;
+	free(philo);
+	free (fork);
 }

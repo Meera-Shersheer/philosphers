@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 18:01:13 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:02:37 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	if (threads_init(&prog) == -1)
 		return (1);
 	destroy_mutexes(&prog);
-		
+	ft_free(prog.philos, prog.forks);
 
 	return (0);
 }

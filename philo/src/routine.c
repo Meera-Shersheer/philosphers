@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:06:05 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 19:52:47 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:59:11 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void *routine(void *arg)
 	philo = (t_philos *) arg;
 	ft_wait(philo->prog);
 	if(philo->index % 2 == 0)
-		usleep(1000);
+		usleep(500);
 	if (record_meal_time(philo) == -1)
 		return (NULL);
 	while (should_stop(philo->prog) != 1)
