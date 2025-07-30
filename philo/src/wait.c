@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 20:16:23 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:33:53 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:02:50 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	wait_philos(t_program *prog)
 	while (i < prog->num_philos)
 	{
 		pthread_join(philos_list[i].thread_id, NULL);
-		return (-1);
 		i++;
 	}
 	if (pthread_mutex_lock(&(prog->state)))

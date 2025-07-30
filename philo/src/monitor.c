@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:57:47 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:24:43 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:07:14 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,19 @@ int	check_death_philos(t_program *prog)
 
 int	check_death(t_philos *philo)
 {
+	pthread_mutex_lock(&(philo->meal_mutex));
 	if ((get_time() - philo->last_meal_time >= philo->prog->time_to_die) && \
 philo->is_eating == 0)
 	{
+		pthread_mutex_unlock(&(philo->meal_mutex));
 		pthread_mutex_lock(&(philo->prog->state));
 		philo->prog->is_stopped = 1;
 		print_actions(philo, 4, get_time() - philo->prog->start_time);
 		pthread_mutex_unlock(&(philo->prog->state));
 		return (1);
 	}
+	else
+		pthread_mutex_unlock(&(philo->meal_mutex));
 	return (0);
 }
 

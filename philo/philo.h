@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:18:17 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:24:45 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int						check_is_num(char *s);
 size_t					ft_strlen(const char *s);
 long long				ft_atol(const char *nptr);
 void					ft_free(t_philos *philo, t_forks *fork);
-
 // philo_init
 int						fill_program_data(int argc, char **argv,
 							t_program *prog);

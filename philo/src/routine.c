@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:06:05 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:31:02 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:23:09 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	*routine(void *arg)
 		if (eaten_enough_meals(philo) == 1)
 			break ;
 		if (eat (philo) == 1)
+			break ;
+		if (eaten_enough_meals(philo) == 1)
 			break ;
 		if (ft_sleep(philo) == 1)
 			break ;

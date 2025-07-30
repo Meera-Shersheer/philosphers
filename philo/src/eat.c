@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 20:10:01 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:15:05 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:25:15 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	record_meal_time(t_philos *philo)
 {
-	if (pthread_mutex_lock(&(philo->meal_mutex)))
-		return (-1);
+	pthread_mutex_lock(&(philo->meal_mutex));
 	philo->last_meal_time = get_time();
-	if (pthread_mutex_unlock(&(philo->meal_mutex)))
-		return (-1);
+	pthread_mutex_unlock(&(philo->meal_mutex));
 	return (0);
 }
 
@@ -40,13 +38,17 @@ void	update_philo_state(t_philos *philo, int state)
 {
 	if (state == 0)
 	{
+		pthread_mutex_lock(&(philo->meal_mutex));
 		philo->is_eating = 1;
 		philo->last_meal_time = get_time();
+		pthread_mutex_unlock(&(philo->meal_mutex));
 	}
 	else
 	{
+		pthread_mutex_lock(&(philo->meal_mutex));
 		philo->is_eating = 0;
 		philo->meals_eaten++;
+		pthread_mutex_unlock(&(philo->meal_mutex));
 	}
 }
 

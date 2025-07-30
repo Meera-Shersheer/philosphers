@@ -6,11 +6,12 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:34:38 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:28:40 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:25:45 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+#include <errno.h>
 
 int	fill_program_data(int argc, char **argv, t_program *prog)
 {
@@ -25,6 +26,12 @@ int	fill_program_data(int argc, char **argv, t_program *prog)
 	else
 		prog->num_meals_must_eat = -1;
 	prog->is_stopped = 0;
+	if (prog->num_philos == 0 || prog->time_to_die == 0 || \
+prog->time_to_eat == 0 || prog->time_to_sleep == 0)
+	{
+		printf("zero argument");
+		return (-1);
+	}
 	return (0);
 }
 
@@ -46,7 +53,7 @@ int	forks_init(t_program *prog)
 	int		i;
 
 	i = 0;
-	forks_list = malloc(sizeof(t_forks) * (prog->num_philos + 1));
+	forks_list = malloc((prog->num_philos + 1) * sizeof(t_forks));
 	if (forks_list == NULL)
 		return (-1);
 	memset(forks_list, 0, sizeof(t_forks) * (prog->num_philos + 1));
@@ -78,7 +85,7 @@ int	philos_init(t_program *prog)
 	philos_list = malloc(sizeof(t_philos) * (prog->num_philos + 1));
 	if (philos_list == NULL)
 		return (-1);
-	memset(philos_list, 0, sizeof(t_forks) * (prog->num_philos + 1));
+	memset(philos_list, 0, sizeof(t_philos) * (prog->num_philos + 1));
 	while (i < prog->num_philos)
 	{
 		philos_list[i].index = i + 1;

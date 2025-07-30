@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:04:21 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:14:06 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:25:01 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,10 @@ int	destroy_mutexes(t_program *prog)
 	while (i < prog->num_philos)
 	{
 		pthread_mutex_destroy(&((prog->forks)[i].fork_mutex));
-		i++;
-	}
-	i = 0;
-	while (i < prog->num_philos)
-	{
 		pthread_mutex_destroy(&((prog->philos)[i].meal_mutex));
 		i++;
 	}
+	free(prog->philos);
+	free(prog->forks);
 	return (1);
 }
