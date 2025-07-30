@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 22:25:30 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:52:28 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	main(int argc, char **argv)
 	if (forks_init(&prog) == -1)
 		return (1);
 	if (philos_init(&prog) == -1)
+	{
+		free(prog.forks);
 		return (1);
+	}
 	if (threads_init(&prog) == -1)
 		return (1);
 	destroy_mutexes(&prog);

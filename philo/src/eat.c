@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 20:10:01 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 22:25:15 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:56:06 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,20 @@ int	eaten_enough_meals(t_philos *philo)
 	int	all_have_eaten;
 
 	all_have_eaten = 1;
+	pthread_mutex_lock(&(philo->meal_mutex));
 	if (philo->prog->num_meals_must_eat == -1)
+	{
+		pthread_mutex_unlock(&(philo->meal_mutex));
 		return (-1);
+	}
 	if (philo->meals_eaten < philo->prog->num_meals_must_eat)
 		all_have_eaten = 0;
 	if (all_have_eaten == 1)
+	{
+		pthread_mutex_unlock(&(philo->meal_mutex));
 		return (1);
+	}
+	pthread_mutex_unlock(&(philo->meal_mutex));
 	return (0);
 }
 
