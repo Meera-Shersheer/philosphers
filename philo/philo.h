@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 18:29:57 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:33:56 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int threads_init(t_program *prog);
 
 //monitor
 int should_stop(t_program *prog);
-void *monitor(t_program *prog);
+void *monitor(void *arg);
 int check_death_philos(t_program *prog);
 int check_death(t_philos *philo);
 
@@ -111,8 +111,7 @@ int eat(t_philos *philo);
 //eat2
 void release_forks(t_forks *first, t_forks *secound);
 int take_fork(t_philos *philo, t_forks *first, t_forks *second);
-
-
+int all_ate(t_program *prog);
 
 
 #endif

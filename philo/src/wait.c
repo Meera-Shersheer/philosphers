@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 20:16:23 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 18:14:15 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:27:04 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	wait_philos(t_program *prog)
 	philos_list = prog->philos;
 	while (i < prog->num_philos)
 	{
-		if (pthread_join(philos_list[i].thread_id, NULL) != 0)
+		pthread_join(philos_list[i].thread_id, NULL);
 			return (-1);	
 		i++;		
 	}

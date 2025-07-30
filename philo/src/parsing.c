@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:57:10 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:34:02 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:02:51 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int check_args(int argc, char **argv)
 	i = 1;
 	if (argc < 5 || argc > 6)
 	{
-		write(2,"philo arguments: num_of_philos time_to_die time_to_eat \
-			time_to_sleep [num_of_must_eaten_meals]\n", ft_strlen("philo \
-				arguments: num_of_philos time_to_die time_to_eat \
-			time_to_sleep [num_of_must_eaten_meals]\n"));
+		write(2,"philo args: num_philos die_T eat_T sleep_T [meals_to_eat]\n", \
+		ft_strlen("philo args: num_philos die_T eat_T sleep_T [meals_to_eat]\n")\
+		);
+			return (-1);
 	}
 	else
 	{		

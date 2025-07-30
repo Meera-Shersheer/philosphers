@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:13:58 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 18:40:36 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:33:43 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int take_fork(t_philos *philo, t_forks *first, t_forks *second)
 	}
 	print_actions(philo, 0, get_time() - philo->prog->start_time);
 	if (philo->prog->num_philos <= 1)
-		return (1);/////check our resopnse 
+	{
+		pthread_mutex_unlock(&(first)->fork_mutex);
+		intrept_waiting(philo->prog->time_to_die, philo->prog);
+		return (1);
+	}
 	if(should_stop(philo->prog) == 1)
 	{
 		pthread_mutex_unlock(&(first)->fork_mutex);
@@ -43,4 +47,20 @@ void release_forks(t_forks *first, t_forks *secound)
 {
 	pthread_mutex_unlock(&(first)->fork_mutex);
 	pthread_mutex_unlock(&(secound)->fork_mutex);
+}
+
+int all_ate(t_program *prog)
+{
+	t_philos *philos;
+	int i;
+	
+	i = 0;
+	philos = prog->philos;
+	while (i < prog->num_philos)
+	{
+		if (eaten_enough_meals(&(philos[i])) == 0)
+			return (0);		
+		i++;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:34:38 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:42:32 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:23:35 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int philos_init(t_program *prog)
 
 int threads_init(t_program *prog)
 {
+	pthread_t monitor_th;
 	t_philos	*philos_list;
 	int i;
 
@@ -116,8 +117,9 @@ int threads_init(t_program *prog)
 	prog->philos_ready = 1;
 	pthread_mutex_unlock(&(prog->state));
 
-	// if (pthread_create(&monitor_th, NULL, monitor, prog) != 0)
-	// 		return (-1);
+	if (pthread_create(&monitor_th, NULL, monitor, prog) != 0)
+			return (-1);
+	pthread_join(monitor_th, NULL);
 	return (wait_philos(prog));
 }
 

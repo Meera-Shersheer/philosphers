@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:04:21 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 17:58:48 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:55:58 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int destroy_intrupted_philos(int i, t_philos *philos_list, t_program *prog)
 	j = 0;
 	pthread_mutex_destroy(&(prog->print));
 	pthread_mutex_destroy(&(prog->state));
-	while (&((prog->forks)[j]) != 0)
+	while (j < prog->num_philos)
 	{
 			pthread_mutex_destroy(&((prog->forks)[j].fork_mutex));
 			j++;
@@ -34,19 +34,18 @@ int destroy_intrupted_philos(int i, t_philos *philos_list, t_program *prog)
 
 int destroy_mutexes(t_program *prog)
 {
-	(void) prog;
 	int i;
 
 	i = 0;
 	pthread_mutex_destroy(&(prog->print));
 	pthread_mutex_destroy(&(prog->state));
-	while (&((prog->forks)[i]) != 0)
+	while (i < prog->num_philos)
 	{
 			pthread_mutex_destroy(&((prog->forks)[i].fork_mutex));
 			i++;
 	}
 	i = 0;
-	while (&((prog->philos)[i]) != 0)
+	while (i < prog->num_philos)
 	{
 			pthread_mutex_destroy(&((prog->philos)[i].meal_mutex));
 			i++;
