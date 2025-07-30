@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:51:02 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:29:57 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ int philos_init(t_program *prog);
 int threads_init(t_program *prog);
 
 //monitor
-void *routine(void *arg);
 int should_stop(t_program *prog);
-//void *monitor(t_program *prog);
+void *monitor(t_program *prog);
+int check_death_philos(t_program *prog);
+int check_death(t_philos *philo);
 
 //wait
 int	wait_philos(t_program *prog);
@@ -96,6 +97,7 @@ int destroy_intrupted_philos(int i, t_philos *philos_list, t_program *prog);
 int destroy_mutexes(t_program *prog);
 
 //routine
+void *routine(void *arg);
 int ft_sleep(t_philos *philo);
 int think(t_philos *philo);
 

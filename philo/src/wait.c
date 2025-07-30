@@ -6,13 +6,12 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 20:16:23 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:40:27 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:14:15 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-/*to be put in the monitor*/
 int	wait_philos(t_program *prog)
 {
 	t_philos	*philos_list;

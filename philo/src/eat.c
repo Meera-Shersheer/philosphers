@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 20:10:01 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:52:20 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:07:31 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ int eat(t_philos *philo)
 
 	setup_forks(philo, &first, &second);
 	if (should_stop(philo->prog) == 1)
-		return (-2);
+		return (1);
 	if(take_fork(philo, first, second) == 1)
-		return (-2);
+		return (1);
 	update_philo_state(philo, 0);
 	print_actions(philo, 1, get_time() - philo->prog->start_time);
 	if(intrept_waiting(philo->prog->time_to_eat, philo->prog) == 1)
 	{
 		update_philo_state(philo, 1);
 		release_forks(first, second);
-		return (-2);
+		return (1);
 	}
 	update_philo_state(philo, 1);
 	release_forks(first, second);

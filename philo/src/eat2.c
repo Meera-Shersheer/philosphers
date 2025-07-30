@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:13:58 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/29 21:52:40 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:40:36 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int take_fork(t_philos *philo, t_forks *first, t_forks *second)
 		return (1);
 	}
 	print_actions(philo, 0, get_time() - philo->prog->start_time);
+	if (philo->prog->num_philos <= 1)
+		return (1);/////check our resopnse 
 	if(should_stop(philo->prog) == 1)
 	{
 		pthread_mutex_unlock(&(first)->fork_mutex);
