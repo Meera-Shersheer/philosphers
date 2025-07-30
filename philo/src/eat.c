@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 20:10:01 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 19:33:32 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:15:05 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	record_meal_time(t_philos *philo)
 
 int	eaten_enough_meals(t_philos *philo)
 {
-	int all_have_eaten;
+	int	all_have_eaten;
 
 	all_have_eaten = 1;
 	if (philo->prog->num_meals_must_eat == -1)
@@ -36,7 +36,7 @@ int	eaten_enough_meals(t_philos *philo)
 	return (0);
 }
 
-void update_philo_state(t_philos *philo, int state)
+void	update_philo_state(t_philos *philo, int state)
 {
 	if (state == 0)
 	{
@@ -50,9 +50,9 @@ void update_philo_state(t_philos *philo, int state)
 	}
 }
 
-void setup_forks(t_philos *philo, t_forks **first, t_forks **second)
+void	setup_forks(t_philos *philo, t_forks **first, t_forks **second)
 {
-	if(!first || !second)
+	if (!first || !second)
 		return ;
 	if (philo->index % 2 == 0)
 	{
@@ -66,19 +66,19 @@ void setup_forks(t_philos *philo, t_forks **first, t_forks **second)
 	}
 }
 
-int eat(t_philos *philo)
+int	eat(t_philos *philo)
 {
-	t_forks *first;
-	t_forks *second;
+	t_forks	*first;
+	t_forks	*second;
 
 	setup_forks(philo, &first, &second);
 	if (should_stop(philo->prog) == 1)
 		return (1);
-	if(take_fork(philo, first, second) == 1)
+	if (take_fork(philo, first, second) == 1)
 		return (1);
 	update_philo_state(philo, 0);
 	print_actions(philo, 1, get_time() - philo->prog->start_time);
-	if(intrept_waiting(philo->prog->time_to_eat, philo->prog) == 1)
+	if (intrept_waiting(philo->prog->time_to_eat, philo->prog) == 1)
 	{
 		update_philo_state(philo, 1);
 		release_forks(first, second);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   untils.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mshershe <mshershe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:28 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 20:02:53 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:32:35 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ size_t	ft_strlen(const char *s)
 long long	ft_atol(const char *nptr)
 {
 	long long	num;
-	int	pn;
-	int	sign;
+	int			pn;
+	int			sign;
 
 	pn = 1;
 	num = 0;
@@ -55,5 +55,5 @@ void	ft_free(t_philos *philo, t_forks *fork)
 	if (!philo || !fork)
 		return ;
 	free(philo);
-	free (fork);
+	free(fork);
 }
