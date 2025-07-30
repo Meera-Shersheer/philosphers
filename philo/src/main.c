@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:50:43 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 22:52:28 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/31 00:39:25 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (check_args(argc, argv) == -1)
 		return (1);
-	memset(&prog, 0, sizeof(t_philos));
+	memset(&prog, 0, sizeof(t_program));
 	if (fill_program_data(argc, argv, &prog) == -1)
 		return (1);
 	if (ft_mutex_init(&prog) == -1)

@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 15:34:38 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 22:52:58 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/31 00:45:43 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	philos_init(t_program *prog)
 		philos_list[i].index = i + 1;
 		if (pthread_mutex_init(&(philos_list[i].meal_mutex), NULL) != 0)
 		{
-			destroy_intrupted_philos(i, philos_list, prog);
+			destroy_intrupted_philos(philos_list, prog);
 			return (-1);
 		}
 		philos_list[i].r_fork = &((prog->forks)[i]);

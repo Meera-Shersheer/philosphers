@@ -6,7 +6,7 @@
 /*   By: mshershe <mshershe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 19:59:48 by mshershe          #+#    #+#             */
-/*   Updated: 2025/07/30 22:24:45 by mshershe         ###   ########.fr       */
+/*   Updated: 2025/07/31 00:43:15 by mshershe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int						ft_wait(t_program *prog);
 int						intrept_waiting(long long time, t_program *prog);
 
 // destroy
-int						destroy_intrupted_philos(int i, t_philos *philos_list,
+int						destroy_intrupted_philos(t_philos *philos_list,
 							t_program *prog);
 int						destroy_mutexes(t_program *prog);
 
